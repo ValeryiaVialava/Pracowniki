@@ -1,0 +1,3 @@
+/Users/valeryiavialava/Desktop/C++/НУ ТИП К КОЛОСУ/1 попыт/cmake-build-debug/CMakeFiles/1_.dir
+/Users/valeryiavialava/Desktop/C++/НУ ТИП К КОЛОСУ/1 попыт/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/valeryiavialava/Desktop/C++/НУ ТИП К КОЛОСУ/1 попыт/cmake-build-debug/CMakeFiles/rebuild_cache.dir
