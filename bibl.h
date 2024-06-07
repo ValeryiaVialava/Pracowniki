@@ -16,7 +16,7 @@ public:
 
     }
     virtual double obliczWyplate() const =0;
-    virtual void print (){
+    virtual void print () const {
         cout << FirstName << ", " << LastName << ", " << Stanowisko << ", " << obliczWyplate() << endl;
     }
 };
@@ -32,6 +32,8 @@ public:
     double obliczWyplate() const override{
         return pensja;
     }
+
+
 };
 
 class PracownikAkordowy: public Pracownik{
@@ -54,8 +56,7 @@ class Firma {
 private:
     string nazwa;
     vector <Pracownik*> pracowniki;
-
-
+//    int counter =0;
 
     void clear (){
         for (int i=0; i < pracowniki.size(); i++ ){
@@ -74,6 +75,7 @@ public:
 
     Firma& operator+=(Pracownik* p){
         pracowniki.push_back(p);
+//        counter++;
         return *this;
     }
 
@@ -94,5 +96,28 @@ public:
          os << "Total Salary: " << F.obliczSumWyplate() << endl;
          return os;
      }
+
+//     int GetCounter (){
+//        return counter;
+//    }
+
+//    bool operator>(const Firma& F) const{
+//        return counter>F.counter;
+//    }
+//    bool operator<(const Firma& F) const{
+//        return counter<F.counter;
+//    }
+
+    bool operator>(const Firma& F) const{
+        return pracowniki.size()>F.pracowniki.size();
+    }
+
+    bool operator<(const Firma& F) const{
+        return pracowniki.size()<F.pracowniki.size();
+    }
+
+    string GetName () {
+        return nazwa;
+    }
 
 };
