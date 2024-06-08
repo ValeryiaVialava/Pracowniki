@@ -19,7 +19,7 @@ public:
     virtual ~Pracownik(){};
     virtual double obliczWyplate() const = 0;
     virtual void print () const {
-        cout << FirstName << ", " << LastName << ", " << Stanowisko << ", " << obliczWyplate() << endl;
+        cout << "Person: " <<FirstName << " " << LastName << ", job: " << Stanowisko << ", salary: " << obliczWyplate() << endl;
     }
 
     bool GetCzyAkordowy (){
@@ -32,7 +32,7 @@ class PracownikEtatowy : public Pracownik{
 private:
     double pensja;
 public:
-    PracownikEtatowy(string imie=" ", string nazwisko=" ", string stan="", double pensjaM=0): Pracownik (imie, nazwisko, stan){
+    PracownikEtatowy(string imie=" ", string nazwisko=" ", string stan=" ", double pensjaM=0): Pracownik (imie, nazwisko, stan){
         pensja=pensjaM;
 
     }
@@ -96,7 +96,7 @@ public:
     }
 
      friend ostream& operator<<(ostream& os, const Firma& F) {
-         os << F.nazwa;
+         os << "Firma: "<< F.nazwa;
          os << endl;
          for (int i = 0; i < F.pracowniki.size(); i++) {
              F.pracowniki[i] -> print ();
@@ -129,11 +129,11 @@ public:
     }
 
     Firma& DeletePracownikAkordowy() {
-        for (auto it = pracowniki.begin(); it != pracowniki.end(); ++it) {
+        for (auto it = pracowniki.begin(); it != pracowniki.end();) {
             if ((*it)->GetCzyAkordowy()) {
-                delete *it;
-                pracowniki.erase(it);
-                break;
+                it = pracowniki.erase(it);
+            } else {
+                ++it;
             }
         }
         return *this;
