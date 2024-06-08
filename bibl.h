@@ -26,7 +26,7 @@ public:
         return CzyAkordowy;
     }
 
-    friend ostream& operator<<(ostream& os, Pracownik& P){
+    friend ostream& operator<<(ostream& os, const Pracownik& P){
         P.print(os);
         return os;
     }
@@ -163,5 +163,4 @@ public:
             cout << *pracownik <<endl;
         }
     }
-
 };
