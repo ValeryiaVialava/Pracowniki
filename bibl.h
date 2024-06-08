@@ -7,6 +7,7 @@ protected:
     string FirstName;
     string LastName;
     string Stanowisko;
+    bool CzyAkordowy = false;
 
 public:
     Pracownik (string firstName, string lastName, string stanowisko){
@@ -15,10 +16,16 @@ public:
         this->Stanowisko=stanowisko;
 
     }
-    virtual double obliczWyplate() const =0;
+    virtual ~Pracownik(){};
+    virtual double obliczWyplate() const = 0;
     virtual void print () const {
         cout << FirstName << ", " << LastName << ", " << Stanowisko << ", " << obliczWyplate() << endl;
     }
+
+    bool GetCzyAkordowy (){
+        return CzyAkordowy;
+    }
+
 };
 
 class PracownikEtatowy : public Pracownik{
@@ -33,7 +40,6 @@ public:
         return pensja;
     }
 
-
 };
 
 class PracownikAkordowy: public Pracownik{
@@ -45,18 +51,20 @@ public:
     PracownikAkordowy(string imie=" ", string nazwisko=" ", string stan="", int counter=0, double cost=0): Pracownik(imie, nazwisko, stan){
         stuka=counter;
         kwota=cost;
-
+        CzyAkordowy=true;
     }
+
     double obliczWyplate() const override{
         return kwota*stuka;
     }
+
 };
 
 class Firma {
 private:
     string nazwa;
     vector <Pracownik*> pracowniki;
-//    int counter =0;
+//  int counter =0;
 
     void clear (){
         for (int i=0; i < pracowniki.size(); i++ ){
@@ -119,5 +127,17 @@ public:
     string GetName () {
         return nazwa;
     }
+
+    Firma& DeletePracownikAkordowy() {
+        for (auto it = pracowniki.begin(); it != pracowniki.end(); ++it) {
+            if ((*it)->GetCzyAkordowy()) {
+                delete *it;
+                pracowniki.erase(it);
+                break;
+            }
+        }
+        return *this;
+    }
+
 
 };

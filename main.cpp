@@ -22,5 +22,13 @@ int main() {
         else
             cout << " zatrudnia jednokowa liość osob " << endl;
 
+        F.DeletePracownikAkordowy();
+        A.DeletePracownikAkordowy();
+
+        cout << "----------------------------------"<<endl;
+
+        cout << F << endl;
+        cout << A << endl;
+
     return 0;
 }
