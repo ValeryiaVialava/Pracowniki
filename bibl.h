@@ -18,12 +18,17 @@ public:
     }
     virtual ~Pracownik(){};
     virtual double obliczWyplate() const = 0;
-    virtual void print () const {
-        cout << "Person: " <<FirstName << " " << LastName << ", job: " << Stanowisko << ", salary: " << obliczWyplate() << endl;
+    virtual void print (ostream& os) const {
+        os << "Person: " <<FirstName << " " << LastName << ", job: " << Stanowisko << ", salary: " << obliczWyplate() << endl;
     }
 
     bool GetCzyAkordowy (){
         return CzyAkordowy;
+    }
+
+    friend ostream& operator<<(ostream& os, Pracownik& P){
+        P.print(os);
+        return os;
     }
 
 };
@@ -39,6 +44,7 @@ public:
     double obliczWyplate() const override{
         return pensja;
     }
+
 
 };
 
@@ -99,7 +105,7 @@ public:
          os << "Firma: "<< F.nazwa;
          os << endl;
          for (int i = 0; i < F.pracowniki.size(); i++) {
-             F.pracowniki[i] -> print ();
+             F.pracowniki[i] -> print (os);
          }
          os << "Total Salary: " << F.obliczSumWyplate() << endl;
          return os;
@@ -138,6 +144,24 @@ public:
         }
         return *this;
     }
-
+};
+template <typename T>
+class MojSzab {
+private:
+    vector <T*> Pracowniki;
+public:
+    ~MojSzab() {
+        for (T* pracownik : Pracowniki) {
+            delete pracownik;
+        }
+    }
+    void dodaj (T* pracownik){
+        Pracowniki.push_back(pracownik);
+    }
+    void drukuj (){
+        for (const T* pracownik : Pracowniki){
+            cout << *pracownik <<endl;
+        }
+    }
 
 };

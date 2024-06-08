@@ -30,5 +30,8 @@ int main() {
         cout << F << endl;
         cout << A << endl;
 
+        MojSzab<Pracownik>zespol;
+        zespol.dodaj(new PracownikAkordowy("Marek", "Postapczuk", "malarz", 20, 50));
+        zespol.drukuj();
     return 0;
 }
